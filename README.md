@@ -54,13 +54,32 @@ This project is built with:
 
 ## How can I deploy this project?
 
-This project can be deployed to any static hosting service (Vercel, Netlify, etc.) or containerized and deployed to cloud platforms.
+### Deploy to Vercel
 
-## Environment Variables
+1. **Connect your GitHub repository to Vercel:**
+   - Go to [vercel.com](https://vercel.com) and sign in
+   - Click "Add New Project"
+   - Import your GitHub repository: `RajivRa12/Scalable-Web-App`
+   - Vercel will auto-detect Vite settings
 
-Make sure to set up your environment variables:
+2. **Configure Environment Variables:**
+   - In Vercel project settings, go to "Environment Variables"
+   - Add the following variables:
+     - `VITE_SUPABASE_URL` - Your Supabase project URL
+     - `VITE_SUPABASE_PUBLISHABLE_KEY` - Your Supabase anon/public key
+
+3. **Deploy:**
+   - Click "Deploy"
+   - Vercel will build and deploy your app automatically
+   - Your app will be live at `https://your-project.vercel.app`
+
+### Environment Variables
+
+Make sure to set up your environment variables in Vercel (or your hosting platform):
 
 ```
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_key
 ```
+
+**Note:** For Vite projects, environment variables must be prefixed with `VITE_` to be accessible in the browser.
