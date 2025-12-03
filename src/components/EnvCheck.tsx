@@ -4,22 +4,29 @@ import { Button } from '@/components/ui/button';
 
 export function EnvCheck({ children }: { children: React.ReactNode }) {
   const [missingEnv, setMissingEnv] = useState<string[]>([]);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     const missing: string[] = [];
     
-    if (!import.meta.env.VITE_SUPABASE_URL) {
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+    
+    if (!supabaseUrl || supabaseUrl.trim() === '') {
       missing.push('VITE_SUPABASE_URL');
     }
     
-    if (!import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY) {
+    if (!supabaseKey || supabaseKey.trim() === '') {
       missing.push('VITE_SUPABASE_PUBLISHABLE_KEY');
     }
 
-    if (missing.length > 0) {
-      setMissingEnv(missing);
-    }
+    setMissingEnv(missing);
+    setChecked(true);
   }, []);
+
+  if (!checked) {
+    return <div className="min-h-screen flex items-center justify-center"><div className="animate-spin">Loading...</div></div>;
+  }
 
   if (missingEnv.length > 0) {
     return (
